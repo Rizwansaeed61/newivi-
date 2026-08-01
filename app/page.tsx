@@ -4373,9 +4373,10 @@ services-detail,Detailed E-Commerce & Shopify Growth Services | Rizwan Saeed,Exp
       return; // Handled separately
     }
 
-    const element = document.getElementById(sectionId);
+    const targetId = sectionId === 'timeline' ? 'journey' : sectionId;
+    const element = document.getElementById(targetId) || document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({behavior: 'smooth'});
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
   // INNER RENDER COMPONENT: Admin Dashboard Layout
@@ -13493,7 +13494,7 @@ Maintain a warm, professional, collaborative, results-oriented, growth-focused t
       </section>
 
       {/* JOURNEY SECTION */}
-      <section className="py-20 bg-[#15120E] border-b border-[#2C2419]">
+      <section id="journey" className="py-20 bg-[#15120E] border-b border-[#2C2419]">
         <div className="w-full max-w-full mx-auto px-4 sm:px-8 lg:px-12 xl:px-16">
           
           {(currentJourneyHeader.badge || currentJourneyHeader.titlePrefix || currentJourneyHeader.titleHighlight) && (
