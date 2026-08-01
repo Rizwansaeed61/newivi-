@@ -49,78 +49,51 @@ export default function ContactPage() {
     document.body.removeChild(a);
   };
 
-  // Load configuration and calendar settings from localStorage safely
-  const [whatsappConfig] = useState(() => {
-    if (typeof window === 'undefined') return { number: "", enableWhatsapp: true, enableForm: true, message: "Hi Rizwan, I would like to book an appointment on {date} at {time} for {service}." };
+  const [whatsappConfig, setWhatsappConfig] = useState<any>({ number: "", enableWhatsapp: true, enableForm: true, message: "Hi Rizwan, I would like to book an appointment on {date} at {time} for {service}." });
+  const [formFields, setFormFields] = useState<any[]>([
+    { id: 'name', type: 'text', label: 'Full Name *', placeholder: 'John Doe', required: true, icon: 'User', width: 'half' },
+    { id: 'email', type: 'email', label: 'Work Email *', placeholder: 'john@company.com', required: true, icon: 'Mail', width: 'half' },
+    { id: 'phone', type: 'tel', label: 'Phone Number *', placeholder: '+1 (555) 000-0000', required: true, icon: 'Phone', width: 'half' },
+    { id: 'company', type: 'text', label: 'Company Name', placeholder: 'Enterprise Inc.', required: false, icon: 'Building', width: 'half' },
+    { id: 'service', type: 'select', label: 'Area of Interest', options: 'High-Performance Sales Funnels, E-Commerce & Shopify, Brand Identity & UI/UX, Conversion Rate Optimization', required: false, icon: 'DollarSign', width: 'full' },
+    { id: 'message', type: 'textarea', label: 'How can we help? *', placeholder: 'Tell us about your revenue goals...', required: true, icon: 'MessageSquare', width: 'full' }
+  ]);
+  const [bookingSlots, setBookingSlots] = useState<string[]>(['09:00 AM', '11:30 AM', '02:00 PM', '04:30 PM', '06:00 PM']);
+  const [bookingServices, setBookingServices] = useState<any[]>([
+    { id: '1', title: '30 Min Strategy Call', duration: '30 min', description: 'One-on-one high performance consulting session.' },
+    { id: '2', title: 'Project Discovery', duration: '45 min', description: 'Technical scope review & architecture design.' },
+    { id: '3', title: 'E-Commerce Growth Audit', duration: '60 min', description: 'Conversion rate optimization & CRO funnel review.' }
+  ]);
+  const [calendarBookings, setCalendarBookings] = useState<any[]>([]);
+  const [blockedDates, setBlockedDates] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
     try {
       const waStr = localStorage.getItem('rizwan_admin_whatsapp');
-      return waStr ? JSON.parse(waStr) : { number: "", enableWhatsapp: true, enableForm: true, message: "Hi Rizwan, I would like to book an appointment on {date} at {time} for {service}." };
-    } catch {
-      return { number: "", enableWhatsapp: true, enableForm: true, message: "Hi Rizwan, I would like to book an appointment on {date} at {time} for {service}." };
-    }
-  });
-
-  const [formFields] = useState<any[]>(() => {
-    if (typeof window === 'undefined') return [];
+      if (waStr) setWhatsappConfig(JSON.parse(waStr));
+    } catch {}
     try {
       const fieldsStr = localStorage.getItem('rizwan_contact_fields');
-      return fieldsStr ? JSON.parse(fieldsStr) : [
-        { id: 'name', type: 'text', label: 'Full Name *', placeholder: 'John Doe', required: true, icon: 'User', width: 'half' },
-        { id: 'email', type: 'email', label: 'Work Email *', placeholder: 'john@company.com', required: true, icon: 'Mail', width: 'half' },
-        { id: 'phone', type: 'tel', label: 'Phone Number *', placeholder: '+1 (555) 000-0000', required: true, icon: 'Phone', width: 'half' },
-        { id: 'company', type: 'text', label: 'Company Name', placeholder: 'Enterprise Inc.', required: false, icon: 'Building', width: 'half' },
-        { id: 'service', type: 'select', label: 'Area of Interest', options: 'High-Performance Sales Funnels, E-Commerce & Shopify, Brand Identity & UI/UX, Conversion Rate Optimization', required: false, icon: 'DollarSign', width: 'full' },
-        { id: 'message', type: 'textarea', label: 'How can we help? *', placeholder: 'Tell us about your revenue goals...', required: true, icon: 'MessageSquare', width: 'full' }
-      ];
-    } catch {
-      return [];
-    }
-  });
-
-  const [bookingSlots] = useState<string[]>(() => {
-    if (typeof window === 'undefined') return ['09:00 AM', '11:30 AM', '02:00 PM', '04:30 PM', '06:00 PM'];
+      if (fieldsStr) setFormFields(JSON.parse(fieldsStr));
+    } catch {}
     try {
       const slotsStr = localStorage.getItem('rizwan_booking_slots');
-      return slotsStr ? JSON.parse(slotsStr) : ['09:00 AM', '11:30 AM', '02:00 PM', '04:30 PM', '06:00 PM'];
-    } catch {
-      return ['09:00 AM', '11:30 AM', '02:00 PM', '04:30 PM', '06:00 PM'];
-    }
-  });
-
-  const [bookingServices] = useState<any[]>(() => {
-    const defaults = [
-      { id: '1', title: '30 Min Strategy Call', duration: '30 min', description: 'One-on-one high performance consulting session.' },
-      { id: '2', title: 'Project Discovery', duration: '45 min', description: 'Technical scope review & architecture design.' },
-      { id: '3', title: 'E-Commerce Growth Audit', duration: '60 min', description: 'Conversion rate optimization & CRO funnel review.' }
-    ];
-    if (typeof window === 'undefined') return defaults;
+      if (slotsStr) setBookingSlots(JSON.parse(slotsStr));
+    } catch {}
     try {
       const servicesStr = localStorage.getItem('rizwan_booking_services');
-      return servicesStr ? JSON.parse(servicesStr) : defaults;
-    } catch {
-      return defaults;
-    }
-  });
-
-  const [calendarBookings, setCalendarBookings] = useState<any[]>(() => {
-    if (typeof window === 'undefined') return [];
+      if (servicesStr) setBookingServices(JSON.parse(servicesStr));
+    } catch {}
     try {
       const bookingsStr = localStorage.getItem('rizwan_calendar_bookings');
-      return bookingsStr ? JSON.parse(bookingsStr) : [];
-    } catch {
-      return [];
-    }
-  });
-
-  const [blockedDates] = useState<string[]>(() => {
-    if (typeof window === 'undefined') return [];
+      if (bookingsStr) setCalendarBookings(JSON.parse(bookingsStr));
+    } catch {}
     try {
       const blockedStr = localStorage.getItem('rizwan_blocked_dates');
-      return blockedStr ? JSON.parse(blockedStr) : [];
-    } catch {
-      return [];
-    }
-  });
+      if (blockedStr) setBlockedDates(JSON.parse(blockedStr));
+    } catch {}
+  }, []);
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
