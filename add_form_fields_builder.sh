@@ -1,0 +1,163 @@
+cat << 'INNER_EOF' > snippet_builder.txt
+              <div className="bg-[#231F17]/30 border border-[#2C2419] p-6 rounded-3xl space-y-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="font-bold text-base text-[#F9F7F2]">Contact Form Fields</h3>
+                    <p className="text-xs text-[#A69D92] mt-1">Manage the fields that appear in your booking form.</p>
+                  </div>
+                  <button 
+                    onClick={() => {
+                      const newField = { id: 'field_' + Date.now(), type: 'text', label: 'New Field', placeholder: '', required: false, icon: 'User', width: 'full' };
+                      saveFormFields([...formFields, newField]);
+                      setEditingFieldId(newField.id);
+                    }}
+                    className="px-4 py-2 bg-[#1C1712] hover:bg-[#2C2419] text-[#E59500] font-bold text-xs rounded-xl transition-colors border border-[#2C2419]"
+                  >
+                    + Add Field
+                  </button>
+                </div>
+                
+                <div className="space-y-3 pt-4 border-t border-[#2C2419]">
+                  {formFields.map((field: any, index: number) => (
+                    <div key={field.id} className="bg-[#1C1712] border border-[#2C2419] rounded-2xl overflow-hidden">
+                      {editingFieldId === field.id ? (
+                        <div className="p-4 space-y-4">
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="space-y-2">
+                              <label className="text-[10px] font-mono tracking-widest text-[#A69D92] uppercase font-bold ml-1">Field Label</label>
+                              <input 
+                                type="text"
+                                value={field.label}
+                                onChange={(e) => {
+                                  const updated = [...formFields];
+                                  updated[index].label = e.target.value;
+                                  saveFormFields(updated);
+                                }}
+                                className="w-full bg-[#15120E] border border-[#2C2419] focus:border-[#E59500] rounded-xl py-2 px-3 text-sm text-[#F9F7F2] outline-none"
+                              />
+                            </div>
+                            <div className="space-y-2">
+                              <label className="text-[10px] font-mono tracking-widest text-[#A69D92] uppercase font-bold ml-1">Field Type</label>
+                              <select 
+                                value={field.type}
+                                onChange={(e) => {
+                                  const updated = [...formFields];
+                                  updated[index].type = e.target.value;
+                                  saveFormFields(updated);
+                                }}
+                                className="w-full bg-[#15120E] border border-[#2C2419] focus:border-[#E59500] rounded-xl py-2 px-3 text-sm text-[#F9F7F2] outline-none"
+                              >
+                                <option value="text">Text (Single Line)</option>
+                                <option value="email">Email</option>
+                                <option value="tel">Phone</option>
+                                <option value="textarea">Textarea (Multi Line)</option>
+                                <option value="select">Dropdown Options</option>
+                              </select>
+                            </div>
+                            
+                            <div className="space-y-2">
+                              <label className="text-[10px] font-mono tracking-widest text-[#A69D92] uppercase font-bold ml-1">Placeholder / Options</label>
+                              <input 
+                                type="text"
+                                value={field.type === 'select' ? field.options : field.placeholder}
+                                onChange={(e) => {
+                                  const updated = [...formFields];
+                                  if (field.type === 'select') updated[index].options = e.target.value;
+                                  else updated[index].placeholder = e.target.value;
+                                  saveFormFields(updated);
+                                }}
+                                placeholder={field.type === 'select' ? 'Option 1, Option 2, Option 3' : 'Placeholder text...'}
+                                className="w-full bg-[#15120E] border border-[#2C2419] focus:border-[#E59500] rounded-xl py-2 px-3 text-sm text-[#F9F7F2] outline-none"
+                              />
+                              {field.type === 'select' && <p className="text-[9px] text-[#6B6053]">Comma-separated list of options</p>}
+                            </div>
+                            
+                            <div className="space-y-2">
+                              <label className="text-[10px] font-mono tracking-widest text-[#A69D92] uppercase font-bold ml-1">Width</label>
+                              <select 
+                                value={field.width || 'full'}
+                                onChange={(e) => {
+                                  const updated = [...formFields];
+                                  updated[index].width = e.target.value;
+                                  saveFormFields(updated);
+                                }}
+                                className="w-full bg-[#15120E] border border-[#2C2419] focus:border-[#E59500] rounded-xl py-2 px-3 text-sm text-[#F9F7F2] outline-none"
+                              >
+                                <option value="full">Full Width</option>
+                                <option value="half">Half Width</option>
+                              </select>
+                            </div>
+                          </div>
+                          
+                          <div className="flex items-center gap-6 pt-2">
+                            <label className="flex items-center gap-2 cursor-pointer">
+                              <input 
+                                type="checkbox"
+                                checked={field.required}
+                                onChange={(e) => {
+                                  const updated = [...formFields];
+                                  updated[index].required = e.target.checked;
+                                  saveFormFields(updated);
+                                }}
+                                className="w-4 h-4 accent-[#E59500]"
+                              />
+                              <span className="text-sm font-medium text-[#F9F7F2]">Required Field</span>
+                            </label>
+                            
+                            <div className="flex-1"></div>
+                            
+                            <button 
+                              onClick={() => {
+                                const updated = formFields.filter((_, i) => i !== index);
+                                saveFormFields(updated);
+                              }}
+                              className="text-red-400 hover:text-red-300 text-sm font-medium"
+                            >
+                              Delete
+                            </button>
+                            <button 
+                              onClick={() => setEditingFieldId(null)}
+                              className="px-4 py-1.5 bg-[#E59500] text-[#15120E] font-bold text-sm rounded-lg"
+                            >
+                              Done
+                            </button>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="flex items-center justify-between p-4 cursor-pointer hover:bg-[#231F17]" onClick={() => setEditingFieldId(field.id)}>
+                          <div className="flex flex-col">
+                            <span className="font-bold text-sm text-[#F9F7F2]">{field.label}</span>
+                            <span className="text-xs text-[#6B6053] capitalize">{field.type} • {field.width === 'half' ? 'Half Width' : 'Full Width'} {field.required && '• Required'}</span>
+                          </div>
+                          <button className="text-[#E59500] hover:text-[#F1A417]">
+                            <Edit3 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                  
+                  {formFields.length === 0 && (
+                    <div className="text-center py-6 text-[#A69D92] text-sm">
+                      No fields configured. Your form will be empty.
+                    </div>
+                  )}
+                </div>
+              </div>
+              
+              <div className="bg-[#231F17]/30 border border-[#2C2419] p-6 rounded-3xl flex items-center justify-between">
+                <div>
+                  <h3 className="font-bold text-base text-[#F9F7F2]">View Inquiries Inbox</h3>
+                  <p className="text-xs text-[#A69D92] mt-1">Check all messages submitted through the contact form.</p>
+                </div>
+                <button 
+                  onClick={() => setActiveAdminTab('inquiries')}
+                  className="px-5 py-2.5 bg-[#E59500] hover:bg-[#F1A417] text-[#15120E] font-bold text-sm rounded-xl transition-all flex items-center gap-2"
+                >
+                  <MessageSquare className="w-4 h-4" />
+                  Open Inbox
+                </button>
+              </div>
+INNER_EOF
+
+sed -i -e '/<p className="text-xs text-\[#6B6053\]">Use {.*} placeholders to automatically insert the user.* selected date and time.<\/p>/r snippet_builder.txt' app/page.tsx

@@ -1,0 +1,9 @@
+                      <p className="text-xs text-[#6B6053]">Use {'{date}'} and {'{time}'} placeholders to automatically insert the user's selected date and time.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+          
+          {activeAdminTab === 'performance' && (() => {

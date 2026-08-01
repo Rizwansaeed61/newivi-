@@ -1,0 +1,18 @@
+cat << 'INNER_EOF' > snippet_handler.txt
+  const handleBookWithWhatsApp = () => {
+    if (!selectedDate || !selectedTime) return;
+    const dateStr = selectedDate.toDateString();
+    
+    // Parse custom message template or use default
+    const template = whatsappConfig.message || "Hi Rizwan, I would like to book an appointment on {date} at {time}.";
+    const message = template.replace(/{date}/g, dateStr).replace(/{time}/g, selectedTime);
+    
+    const phone = whatsappConfig.number || '1234567890'; // fallback
+    const url = `https://wa.me/${phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+  };
+INNER_EOF
+
+sed -i -e '/const handleBookWithWhatsApp = () => {/,/  };/c\
+'"$(cat snippet_handler.txt | tr '\n' '\r' | sed -e 's/\r/\\n/g')"'
+' app/contact/page.tsx

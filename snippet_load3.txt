@@ -1,0 +1,13 @@
+    if (configStr) {
+      try {
+        const config = JSON.parse(configStr);
+        setWhatsappConfig({
+          number: config.number || "",
+          enableWhatsapp: config.enableWhatsapp !== false,
+          enableForm: config.enableForm !== false,
+          message: config.message || "Hi Rizwan, I would like to book an appointment on {date} at {time}."
+        });
+      } catch (e) {}
+    }
+    
+    const fieldsStr = localStorage.getItem('rizwan_contact_fields');

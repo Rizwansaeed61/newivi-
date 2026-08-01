@@ -1,0 +1,2 @@
+sed -i 's/const \[whatsappNumber, setWhatsappNumber\] = useState('"'"''"'"');/const [whatsappConfig, setWhatsappConfig] = useState({ number: "", enableWhatsapp: true, enableForm: true });/g' app/contact/page.tsx
+sed -i 's/setWhatsappNumber(config.number || '"'"''"'"');/setWhatsappConfig({\n          number: config.number || "",\n          enableWhatsapp: config.enableWhatsapp !== false,\n          enableForm: config.enableForm !== false\n        });/g' app/contact/page.tsx

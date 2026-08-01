@@ -1,0 +1,48 @@
+cat << 'INNER_EOF' > snippet_submit.txt
+  const handleContactSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    
+    // Extract data from form using the placeholder fields as structure
+    const name = (form.querySelector('input[type="text"][placeholder="John Doe"]') as HTMLInputElement)?.value || 'Unknown';
+    const email = (form.querySelector('input[type="email"]') as HTMLInputElement)?.value || 'Unknown';
+    const phone = (form.querySelector('input[type="tel"]') as HTMLInputElement)?.value || 'Not provided';
+    const company = (form.querySelector('input[placeholder="Enterprise Inc."]') as HTMLInputElement)?.value || 'Not provided';
+    const service = (form.querySelector('select') as HTMLSelectElement)?.value || 'General';
+    const message = (form.querySelector('textarea') as HTMLTextAreaElement)?.value || 'No message';
+    
+    const newInquiry = {
+      id: Date.now(),
+      name: name,
+      email: email,
+      phone: phone,
+      company: company,
+      service: service,
+      budget: 'N/A (From Calendar)',
+      country: 'N/A',
+      message: message + (selectedDate ? `\n\n[Requested Appointment: ${selectedDate.toDateString()} at ${selectedTime}]` : ''),
+      date: new Date().toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' }),
+      read: false,
+    };
+    
+    try {
+      const existing = localStorage.getItem('rizwan_inquiries');
+      let inquiries = [];
+      if (existing) { inquiries = JSON.parse(existing); }
+      inquiries = [newInquiry, ...inquiries];
+      localStorage.setItem('rizwan_inquiries', JSON.stringify(inquiries));
+    } catch(e) {}
+    
+    alert('Thank you! Your inquiry has been submitted. We will be in touch soon.');
+    setShowForm(false);
+    setSelectedTime(null);
+    setSelectedDate(null);
+    form.reset();
+  };
+INNER_EOF
+
+# Add this before return in ContactPage
+sed -i -e '/return (/r snippet_submit.txt' app/contact/page.tsx
+
+# Change onSubmit in ContactPage form
+sed -i 's/onSubmit={(e) => { e.preventDefault(); alert('\''Form submitted!'\''); }}/onSubmit={handleContactSubmit}/g' app/contact/page.tsx

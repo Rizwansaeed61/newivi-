@@ -1,0 +1,8 @@
+{
+  "name": "Luxury Agency & CMS Showcase",
+  "description": "Enterprise agency portfolio with high-performance client showcases and admin management CMS",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

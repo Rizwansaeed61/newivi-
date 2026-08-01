@@ -1,0 +1,62 @@
+cat << 'INNER_EOF' > snippet.txt
+          {activeAdminTab === 'contact_settings' && (
+            <div className="space-y-6 animate-fadeIn">
+              <div className="bg-[#231F17]/30 border border-[#2C2419] p-6 rounded-3xl space-y-4">
+                <div>
+                  <h3 className="font-bold text-base text-[#F9F7F2]">Contact & WhatsApp Integration</h3>
+                  <p className="text-xs text-[#A69D92] mt-1">Configure your booking widget options and WhatsApp phone number.</p>
+                </div>
+                
+                <div className="space-y-6 pt-4 border-t border-[#2C2419]">
+                  
+                  <div className="flex items-center justify-between max-w-xl">
+                    <div>
+                      <h4 className="text-sm font-bold text-[#F9F7F2]">Enable Contact Form</h4>
+                      <p className="text-xs text-[#6B6053] mt-0.5">Allow users to fill out a contact form after selecting a time.</p>
+                    </div>
+                    <button
+                      onClick={() => saveWhatsappConfig({ ...whatsappConfig, enableForm: !whatsappConfig.enableForm })}
+                      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors shrink-0 ${whatsappConfig.enableForm !== false ? 'bg-[#E59500]' : 'bg-[#3C3224]'}`}
+                    >
+                      <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${whatsappConfig.enableForm !== false ? 'translate-x-6' : 'translate-x-1'}`} />
+                    </button>
+                  </div>
+                  
+                  <div className="flex items-center justify-between max-w-xl pt-4 border-t border-[#2C2419]/50">
+                    <div>
+                      <h4 className="text-sm font-bold text-[#F9F7F2]">Enable WhatsApp Booking</h4>
+                      <p className="text-xs text-[#6B6053] mt-0.5">Allow users to message you directly on WhatsApp after selecting a time.</p>
+                    </div>
+                    <button
+                      onClick={() => saveWhatsappConfig({ ...whatsappConfig, enableWhatsapp: !whatsappConfig.enableWhatsapp })}
+                      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors shrink-0 ${whatsappConfig.enableWhatsapp !== false ? 'bg-[#E59500]' : 'bg-[#3C3224]'}`}
+                    >
+                      <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${whatsappConfig.enableWhatsapp !== false ? 'translate-x-6' : 'translate-x-1'}`} />
+                    </button>
+                  </div>
+
+                  <div className={`space-y-2 max-w-sm pt-4 border-t border-[#2C2419]/50 transition-opacity duration-300 ${whatsappConfig.enableWhatsapp !== false ? 'opacity-100' : 'opacity-40 pointer-events-none'}`}>
+                    <label className="text-[10px] font-mono tracking-widest text-[#E59500] uppercase font-bold ml-1 block">WhatsApp Number</label>
+                    <div className="relative">
+                      <div className="absolute left-4 top-1/2 -translate-y-1/2">
+                        <Phone className="w-4 h-4 text-[#6B6053]" />
+                      </div>
+                      <input 
+                        type="text" 
+                        value={whatsappConfig.number || ''}
+                        onChange={(e) => saveWhatsappConfig({ ...whatsappConfig, number: e.target.value })}
+                        placeholder="+1234567890"
+                        className="w-full bg-[#15120E] border border-[#2C2419] focus:border-[#E59500] rounded-xl py-3 pl-10 pr-4 text-sm text-[#F9F7F2] outline-none transition-all placeholder:text-[#6B6053]"
+                      />
+                    </div>
+                    <p className="text-xs text-[#6B6053]">Include your country code (e.g., +1 for US, +91 for India, +92 for Pakistan).</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+INNER_EOF
+
+sed -i -e '/{activeAdminTab === '"'"'contact_settings'"'"' && (/,/          )}/c\
+'"$(cat snippet.txt | tr '\n' '\r' | sed -e 's/\r/\\n/g')"'
+' app/page.tsx
