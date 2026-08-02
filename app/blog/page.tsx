@@ -61,29 +61,24 @@ const DEFAULT_BLOGS: BlogPost[] = [
 
 export default function BlogDirectoryPage() {
   const router = useRouter();
-  const [blogs, setBlogs] = useState<BlogPost[]>([]);
+  const [blogs, setBlogs] = useState<BlogPost[]>(DEFAULT_BLOGS);
   const [searchQuery, setSearchQuery] = useState('');
-  const [recentSearches, setRecentSearches] = useState<string[]>([]);
+  const [recentSearches, setRecentSearches] = useState<string[]>(['UI Design', 'Negative Space', 'Responsive']);
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     try {
       const saved = localStorage.getItem('rizwan_blogs');
-      const loadedBlogs = saved ? JSON.parse(saved) : DEFAULT_BLOGS;
+      if (saved) {
+        setBlogs(JSON.parse(saved));
+      }
       const savedSearches = localStorage.getItem('rizwan_recent_searches_blog');
-      const searchesArr = savedSearches ? JSON.parse(savedSearches) : ['UI Design', 'Negative Space', 'Responsive'];
-      
-      Promise.resolve().then(() => {
-        setBlogs(loadedBlogs);
-        setRecentSearches(searchesArr);
-        setLoading(false);
-      });
+      if (savedSearches) {
+        setRecentSearches(JSON.parse(savedSearches));
+      }
     } catch (e) {
-      Promise.resolve().then(() => {
-        setBlogs(DEFAULT_BLOGS);
-        setLoading(false);
-      });
+      console.error(e);
     }
   }, []);
 
@@ -320,10 +315,10 @@ export default function BlogDirectoryPage() {
 
             <div className="md:col-span-6 flex flex-col items-start md:items-end justify-between gap-4">
               <div className="flex items-center gap-3">
-                <a href="#" className="w-8 h-8 rounded-full bg-[#231F17]/50 border border-[#2C2419] flex items-center justify-center text-[#6B6053] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Instagram className="w-4 h-4" /></a>
-                <a href="#" className="w-8 h-8 rounded-full bg-[#231F17]/50 border border-[#2C2419] flex items-center justify-center text-[#6B6053] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Linkedin className="w-4 h-4" /></a>
-                <a href="#" className="w-8 h-8 rounded-full bg-[#231F17]/50 border border-[#2C2419] flex items-center justify-center text-[#6B6053] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Twitter className="w-4 h-4" /></a>
-                <a href="#" className="w-8 h-8 rounded-full bg-[#231F17]/50 border border-[#2C2419] flex items-center justify-center text-[#6B6053] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Github className="w-4 h-4" /></a>
+                <a href="https://instagram.com/rizwansaeed" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-[#231F17]/50 border border-[#2C2419] flex items-center justify-center text-[#6B6053] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Instagram className="w-4 h-4" /></a>
+                <a href="https://www.linkedin.com/in/rizwansaeed" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-[#231F17]/50 border border-[#2C2419] flex items-center justify-center text-[#6B6053] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Linkedin className="w-4 h-4" /></a>
+                <a href="https://x.com/rizwansaeed" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-[#231F17]/50 border border-[#2C2419] flex items-center justify-center text-[#6B6053] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Twitter className="w-4 h-4" /></a>
+                <a href="https://github.com/Rizwansaeed61" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-[#231F17]/50 border border-[#2C2419] flex items-center justify-center text-[#6B6053] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Github className="w-4 h-4" /></a>
               </div>
               <p className="text-xs text-[#6B6053]">© 2026 Rizwan Saeed. All rights reserved.</p>
             </div>

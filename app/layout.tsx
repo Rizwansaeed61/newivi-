@@ -3,30 +3,37 @@ import Script from 'next/script';
 import './globals.css';
 import ScrollToTop from '@/components/ScrollToTop';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://rizwansaddique.site';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Luxury Agency & CMS Showcase',
-    template: '%s | Luxury Agency'
+    default: 'Rizwan Saeed | Digital Marketing Manager & Shopify Developer — Dubai & Pakistan',
+    template: '%s | Rizwan Saeed'
   },
-  description: 'Enterprise agency portfolio with high-performance client showcases and admin management CMS',
-  keywords: ['Luxury Agency', 'Digital Agency', 'Portfolio', 'CMS', 'Web Design'],
-  authors: [{ name: 'Agency Name' }],
-  creator: 'Agency Name',
+  description: 'Results-driven Digital Marketing Manager & Shopify Developer helping brands in UAE & Pakistan scale with Google Ads, Meta Ads, SEO & Shopify Development. 100+ projects, AED 1.2M+ revenue generated.',
+  keywords: [
+    'Digital Marketing Manager',
+    'Shopify Developer',
+    'Google Ads Expert',
+    'Meta Ads',
+    'SEO Dubai',
+    'Shopify Development Pakistan',
+  ],
+  authors: [{ name: 'Rizwan Saeed' }],
+  creator: 'Rizwan Saeed',
   metadataBase: new URL(siteUrl),
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: siteUrl,
-    title: 'Luxury Agency & CMS Showcase',
-    description: 'Enterprise agency portfolio with high-performance client showcases and admin management CMS',
-    siteName: 'Luxury Agency',
+    title: 'Rizwan Saeed | Digital Marketing Manager & Shopify Developer',
+    description: 'Results-driven Digital Marketing Manager & Shopify Developer helping brands in UAE & Pakistan scale with Google Ads, Meta Ads, SEO & Shopify Development. 100+ projects, AED 1.2M+ revenue generated.',
+    siteName: 'Rizwan Saeed',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Luxury Agency & CMS Showcase',
-    description: 'Enterprise agency portfolio with high-performance client showcases and admin management CMS',
+    title: 'Rizwan Saeed | Digital Marketing Manager & Shopify Developer',
+    description: 'Results-driven Digital Marketing Manager & Shopify Developer helping brands in UAE & Pakistan scale with Google Ads, Meta Ads, SEO & Shopify Development.',
   },
   robots: {
     index: true,
@@ -49,13 +56,13 @@ export default function RootLayout({
   const schemaOrgJSONLD = {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
-    name: 'Luxury Agency',
+    name: 'Rizwan Saeed',
     url: siteUrl,
-    description: 'Enterprise agency portfolio with high-performance client showcases and admin management CMS.',
+    description: 'Results-driven Digital Marketing Manager & Shopify Developer helping brands in UAE & Pakistan scale with Google Ads, Meta Ads, SEO & Shopify Development.',
     image: `${siteUrl}/og-image.jpg`,
     sameAs: [
-      'https://twitter.com/yourprofile',
-      'https://linkedin.com/in/yourprofile'
+      'https://www.linkedin.com/in/rizwansaeed',
+      'https://github.com/Rizwansaeed61'
     ]
   };
 

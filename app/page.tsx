@@ -803,6 +803,7 @@ const DEFAULT_PROJECTS: Project[] = [
     stats: [
       {label: "Google Clicks", value: "990"},
       {label: "Impressions", value: "180K"},
+      {label: "GSC CTR", value: "0.6%"},
       {label: "Average Pos.", value: "57.2"},
     ],
     tags: ["Shopify Development", "Technical SEO", "Speed Optimization"],
@@ -2322,7 +2323,7 @@ const GoogleSearchPreview = ({
 
   const displayTitle = title.trim() || 'Untitled Page - Search Title';
   const displayDesc = description.trim() || 'No meta description provided. Search engines will extract a snippet automatically from page body text.';
-  const displayUrl = url.startsWith('http') ? url : `https://rizwansaeed.com${url.startsWith('/') ? '' : '/'}${url}`;
+  const displayUrl = url.startsWith('http') ? url : `https://rizwansaddique.site${url.startsWith('/') ? '' : '/'}${url}`;
 
   const formattedUrlBreadcrumb = displayUrl
     .replace('https://', '')
@@ -2386,9 +2387,9 @@ const GoogleSearchPreview = ({
             RS
           </div>
           <div className="truncate flex items-center gap-1">
-            <span className="font-medium text-[#e8eaed]">rizwansaeed.com</span>
+            <span className="font-medium text-[#e8eaed]">rizwansaddique.site</span>
             <span className="text-[#9aa0a6] font-mono text-[11px] truncate">
-              › {formattedUrlBreadcrumb.replace('rizwansaeed.com', '').replace(/^ › /, '') || 'home'}
+              › {formattedUrlBreadcrumb.replace('rizwansaddique.site', '').replace(/^ › /, '') || 'home'}
             </span>
           </div>
         </div>
@@ -7977,7 +7978,7 @@ Maintain a warm, professional, collaborative, results-oriented, growth-focused t
                           type="text"
                           value={footerConfig.address || ''}
                           onChange={(e) => setFooterConfig({ ...footerConfig, address: e.target.value })}
-                          placeholder="e.g. 786 Forest Hill Boulevard..."
+                          placeholder="e.g. Dubai Marina, Dubai, UAE"
                           className="w-full bg-[#231F17] border border-[#2C2419] rounded-xl px-3.5 py-2 text-xs text-[#F9F7F2] focus:border-[#E59500] outline-none"
                         />
                       </div>
@@ -12990,10 +12991,10 @@ Maintain a warm, professional, collaborative, results-oriented, growth-focused t
                   <div className="flex items-center gap-4 mt-4 pt-4 border-t border-[#2C2419]">
                     <span className="text-xs font-mono text-[#6B6053]">FOLLOW ME ON:</span>
                     <div className="flex items-center gap-2">
-                      <a href="#" className="w-8 h-8 rounded-full bg-[#231F17]/80 backdrop-blur-sm border border-[#3C3224]/50 flex items-center justify-center text-[#A69D92] hover:text-[#E59500] hover:border-[#E59500] transition-all"><Instagram className="w-4 h-4" /></a>
-                      <a href="#" className="w-8 h-8 rounded-full bg-[#231F17]/80 backdrop-blur-sm border border-[#3C3224]/50 flex items-center justify-center text-[#A69D92] hover:text-[#E59500] hover:border-[#E59500] transition-all"><Linkedin className="w-4 h-4" /></a>
-                      <a href="#" className="w-8 h-8 rounded-full bg-[#231F17]/80 backdrop-blur-sm border border-[#3C3224]/50 flex items-center justify-center text-[#A69D92] hover:text-[#E59500] hover:border-[#E59500] transition-all"><Github className="w-4 h-4" /></a>
-                      <a href="#" className="w-8 h-8 rounded-full bg-[#231F17]/80 backdrop-blur-sm border border-[#3C3224]/50 flex items-center justify-center text-[#A69D92] hover:text-[#E59500] hover:border-[#E59500] transition-all"><Twitter className="w-4 h-4" /></a>
+                      <a href="https://instagram.com/rizwansaeed" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-[#231F17]/80 backdrop-blur-sm border border-[#3C3224]/50 flex items-center justify-center text-[#A69D92] hover:text-[#E59500] hover:border-[#E59500] transition-all"><Instagram className="w-4 h-4" /></a>
+                      <a href="https://www.linkedin.com/in/rizwansaeed" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-[#231F17]/80 backdrop-blur-sm border border-[#3C3224]/50 flex items-center justify-center text-[#A69D92] hover:text-[#E59500] hover:border-[#E59500] transition-all"><Linkedin className="w-4 h-4" /></a>
+                      <a href="https://github.com/Rizwansaeed61" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-[#231F17]/80 backdrop-blur-sm border border-[#3C3224]/50 flex items-center justify-center text-[#A69D92] hover:text-[#E59500] hover:border-[#E59500] transition-all"><Github className="w-4 h-4" /></a>
+                      <a href="https://x.com/rizwansaeed" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-[#231F17]/80 backdrop-blur-sm border border-[#3C3224]/50 flex items-center justify-center text-[#A69D92] hover:text-[#E59500] hover:border-[#E59500] transition-all"><Twitter className="w-4 h-4" /></a>
                     </div>
                   </div>
                 </div>
@@ -13058,7 +13059,7 @@ Maintain a warm, professional, collaborative, results-oriented, growth-focused t
           style={{ animation: `marquee ${currentTickerSpeed}s linear infinite` }}
         >
           {(currentTickerItems.length > 0 ? [...currentTickerItems, ...currentTickerItems, ...currentTickerItems, ...currentTickerItems] : DEFAULT_TICKER_ITEMS).map((item, idx) => (
-            <span key={idx}>{item} ✦</span>
+            <span key={idx} aria-hidden={idx >= (currentTickerItems.length || DEFAULT_TICKER_ITEMS.length) ? "true" : undefined}>{item} ✦</span>
           ))}
         </div>
       </div>
@@ -14082,7 +14083,7 @@ Maintain a warm, professional, collaborative, results-oriented, growth-focused t
                   <MapPin className="w-5 h-5 text-[#E59500] shrink-0 mt-0.5" />
                   <div>
                     <h4 className="font-bold text-sm text-[#F9F7F2]">Address</h4>
-                    <p className="text-xs text-[#A69D92] mt-1">786 Forest Hill Boulevard, Suite 203B, San Mateo, CA 94401, United States</p>
+                    <p className="text-xs text-[#A69D92] mt-1">Dubai Marina, Dubai, UAE</p>
                   </div>
                 </div>
               </div>
@@ -14130,10 +14131,10 @@ Maintain a warm, professional, collaborative, results-oriented, growth-focused t
               <div className="bg-[#231F17]/40 border border-[#2C2419] p-6 rounded-2xl">
                 <span className="text-[10px] font-mono text-[#E59500] tracking-wider uppercase block mb-3">✦ STAY CONNECTED</span>
                 <div className="flex items-center gap-3">
-                  <a href="#" className="w-10 h-10 rounded-full bg-[#15120E] border border-[#2C2419] flex items-center justify-center text-[#A69D92] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Instagram className="w-5 h-5" /></a>
-                  <a href="#" className="w-10 h-10 rounded-full bg-[#15120E] border border-[#2C2419] flex items-center justify-center text-[#A69D92] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Linkedin className="w-5 h-5" /></a>
-                  <a href="#" className="w-10 h-10 rounded-full bg-[#15120E] border border-[#2C2419] flex items-center justify-center text-[#A69D92] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Twitter className="w-5 h-5" /></a>
-                  <a href="#" className="w-10 h-10 rounded-full bg-[#15120E] border border-[#2C2419] flex items-center justify-center text-[#A69D92] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Github className="w-5 h-5" /></a>
+                  <a href="https://instagram.com/rizwansaeed" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-[#15120E] border border-[#2C2419] flex items-center justify-center text-[#A69D92] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Instagram className="w-5 h-5" /></a>
+                  <a href="https://www.linkedin.com/in/rizwansaeed" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-[#15120E] border border-[#2C2419] flex items-center justify-center text-[#A69D92] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Linkedin className="w-5 h-5" /></a>
+                  <a href="https://x.com/rizwansaeed" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-[#15120E] border border-[#2C2419] flex items-center justify-center text-[#A69D92] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Twitter className="w-5 h-5" /></a>
+                  <a href="https://github.com/Rizwansaeed61" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-[#15120E] border border-[#2C2419] flex items-center justify-center text-[#A69D92] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Github className="w-5 h-5" /></a>
                 </div>
               </div>
 
@@ -14177,6 +14178,23 @@ Maintain a warm, professional, collaborative, results-oriented, growth-focused t
 
             {/* Accordion List Right */}
             <div className="lg:col-span-7 flex flex-col gap-4">
+              <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                  __html: JSON.stringify({
+                    '@context': 'https://schema.org',
+                    '@type': 'FAQPage',
+                    mainEntity: currentFaqs.map((faq) => ({
+                      '@type': 'Question',
+                      name: faq.q,
+                      acceptedAnswer: {
+                        '@type': 'Answer',
+                        text: faq.a,
+                      },
+                    })),
+                  }),
+                }}
+              />
               {currentFaqs.map((faq) => {
                 const isOpen = expandedFaq === faq.id;
                 return (
@@ -14198,20 +14216,11 @@ Maintain a warm, professional, collaborative, results-oriented, growth-focused t
                       </div>
                     </button>
 
-                    <AnimatePresence initial={false}>
-                      {isOpen && (
-                        <motion.div
-                          initial={{height: 0, opacity: 0}}
-                          animate={{height: 'auto', opacity: 1}}
-                          exit={{height: 0, opacity: 0}}
-                          transition={{duration: 0.2}}
-                        >
-                          <div className="px-6 pb-5 pt-1 text-xs text-[#A69D92] leading-relaxed border-t border-[#2C2419]/50">
-                            {faq.a}
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
+                    <div className={isOpen ? 'block' : 'hidden'}>
+                      <div className="px-6 pb-5 pt-1 text-xs text-[#A69D92] leading-relaxed border-t border-[#2C2419]/50">
+                        {faq.a}
+                      </div>
+                    </div>
                   </div>
                 );
               })}
@@ -14267,10 +14276,10 @@ Maintain a warm, professional, collaborative, results-oriented, growth-focused t
                 )}
                 
                 <div className="flex items-center gap-3 mt-2">
-                  <a href="#" className="w-8 h-8 rounded-full bg-[#231F17]/50 border border-[#2C2419] flex items-center justify-center text-[#6B6053] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Instagram className="w-4 h-4" /></a>
-                  <a href="#" className="w-8 h-8 rounded-full bg-[#231F17]/50 border border-[#2C2419] flex items-center justify-center text-[#6B6053] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Linkedin className="w-4 h-4" /></a>
-                  <a href="#" className="w-8 h-8 rounded-full bg-[#231F17]/50 border border-[#2C2419] flex items-center justify-center text-[#6B6053] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Twitter className="w-4 h-4" /></a>
-                  <a href="#" className="w-8 h-8 rounded-full bg-[#231F17]/50 border border-[#2C2419] flex items-center justify-center text-[#6B6053] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Github className="w-4 h-4" /></a>
+                  <a href="https://instagram.com/rizwansaeed" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-[#231F17]/50 border border-[#2C2419] flex items-center justify-center text-[#6B6053] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Instagram className="w-4 h-4" /></a>
+                  <a href="https://www.linkedin.com/in/rizwansaeed" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-[#231F17]/50 border border-[#2C2419] flex items-center justify-center text-[#6B6053] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Linkedin className="w-4 h-4" /></a>
+                  <a href="https://x.com/rizwansaeed" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-[#231F17]/50 border border-[#2C2419] flex items-center justify-center text-[#6B6053] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Twitter className="w-4 h-4" /></a>
+                  <a href="https://github.com/Rizwansaeed61" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-[#231F17]/50 border border-[#2C2419] flex items-center justify-center text-[#6B6053] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Github className="w-4 h-4" /></a>
                 </div>
               </div>
             )}
@@ -14361,11 +14370,11 @@ Maintain a warm, professional, collaborative, results-oriented, growth-focused t
           </div>
 
           <div className="border-t border-[#2C2419] pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-[#6B6053]">
-            <p>{currentFooterConfig.copyright || '© 2026 Jenny Scott Design. All rights reserved.'}</p>
+            <p>{currentFooterConfig.copyright || '© 2026 Rizwan Saeed. All rights reserved.'}</p>
             <div className="flex gap-4 mt-4 sm:mt-0">
-              <a href="#" className="hover:text-[#E59500]">Privacy Policy</a>
+              <a href="/custom-pages/privacy-policy" className="hover:text-[#E59500]">Privacy Policy</a>
               <span>•</span>
-              <a href="#" className="hover:text-[#E59500]">Terms of Service</a>
+              <a href="/custom-pages/terms-of-service" className="hover:text-[#E59500]">Terms of Service</a>
             </div>
           </div>
 

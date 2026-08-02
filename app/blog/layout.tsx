@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://rizwansaeed.com/blog',
+    url: 'https://rizwansaddique.site/blog',
     title: 'Blog & Insights | Rizwan Saeed',
     description: 'Explore actionable insights, strategic guides, and industry trends on Google Ads, Meta Ads, SEO, CRO, and custom Shopify development by Rizwan Saeed.',
     siteName: 'Rizwan Saeed Portfolio',

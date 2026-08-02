@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://rizwansaeed.com/custom-pages',
+    url: 'https://rizwansaddique.site/custom-pages',
     title: 'Custom Pages & Resources | Rizwan Saeed',
     description: 'Specialized landing pages, tools, and digital resources designed and managed by Rizwan Saeed.',
     siteName: 'Rizwan Saeed Portfolio',

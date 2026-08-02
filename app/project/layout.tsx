@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://rizwansaeed.com/project',
+    url: 'https://rizwansaddique.site/project',
     title: 'Portfolio & Case Studies | Rizwan Saeed',
     description: 'Explore real-world case studies, custom Shopify e-commerce store developments, and high-ROI digital marketing performance campaigns by Rizwan Saeed.',
     siteName: 'Rizwan Saeed Portfolio',

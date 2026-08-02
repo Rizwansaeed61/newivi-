@@ -64,6 +64,66 @@ If you have questions about custom design retainer services or single project sp
 * **Enterprise Scale**: $9,000/month (Includes 35 hours/week dedicated design sprint lead, component-by-component Figma architecture, and unlimited iterations).
 
 Contact us directly to lock in pricing for 2026.`
+  },
+  {
+    id: "3",
+    title: "Services Detail",
+    slug: "services-detail",
+    seoTitle: "Digital Marketing & Shopify Development Services | Rizwan Saeed",
+    seoDescription: "Explore custom product design work, visual aesthetics, typography pairing strategy, responsive layout audits, and user testing frameworks by Rizwan Saeed.",
+    content: `## Comprehensive Growth & Development Services
+
+We help ambitious brands scale rapidly across UAE, Pakistan, and global markets with performance marketing and custom Shopify solutions.
+
+### Core Solutions
+1. **Google Ads & PMax**: Search, Shopping, and Performance Max campaigns optimized for high ROAS.
+2. **Meta Ads Scaling**: Data-driven creative testing, retargeting funnels, and scaling frameworks on Instagram & Facebook.
+3. **Technical SEO & Audits**: Structural silo architecture, speed optimization, and on-page technical enhancements.
+4. **Shopify Development**: Custom Liquid section development, sub-1.5s load speeds, and conversion rate optimization.`
+  },
+  {
+    id: "4",
+    title: "About Rizwan Saeed",
+    slug: "about-story",
+    seoTitle: "About Rizwan Saeed | Digital Marketing Manager & Shopify Developer",
+    seoDescription: "Learn about Rizwan Saeed's journey, experience scaling AED 1.2M+ in revenue across 100+ projects in UAE & Pakistan.",
+    content: `## My Journey & Approach
+
+With over 5 years of hands-on experience in performance marketing, technical SEO, and e-commerce development, I help businesses transform traffic into scalable revenue.
+
+### Strategic Highlights
+* **AED 1.2M+ Revenue Generated**: Proven campaigns across hospitality, e-commerce retail, and B2B sectors.
+* **100+ Projects Delivered**: Custom Shopify themes, technical search engine optimizations, and paid acquisition funnels.
+* **Dual Region Focus**: Deep market understanding in both the UAE (Dubai Marina) and Pakistan.`
+  },
+  {
+    id: "5",
+    title: "Privacy Policy",
+    slug: "privacy-policy",
+    seoTitle: "Privacy Policy | Rizwan Saeed",
+    seoDescription: "Privacy policy for rizwansaddique.site detailing data collection, usage, contact form privacy, and user security.",
+    content: `## Privacy Policy
+
+Your privacy is paramount. This policy details how personal information collected through rizwansaddique.site is handled.
+
+### Data Collection & Usage
+* Information submitted via our contact forms (Name, Email, Phone, Project Details) is strictly used to evaluate and respond to project inquiries.
+* We do not sell, rent, or share personal information with third parties.
+* Standard web analytics may be collected anonymously to improve site performance and user experience.`
+  },
+  {
+    id: "6",
+    title: "Terms of Service",
+    slug: "terms-of-service",
+    seoTitle: "Terms of Service | Rizwan Saeed",
+    seoDescription: "Terms of service and engagement guidelines for digital marketing and Shopify development services by Rizwan Saeed.",
+    content: `## Terms of Service
+
+Welcome to rizwansaddique.site. By accessing or requesting services on this site, you agree to these terms.
+
+### Services & Intellectual Property
+* All custom code, design strategies, and consulting outputs delivered under contract belong to the client upon full payment.
+* Content on this website is protected by copyright and intellectual property rights.`
   }
 ];
 
@@ -72,9 +132,13 @@ export default function CustomPageDetail() {
   const router = useRouter();
   const slug = params?.slug as string;
 
-  const [page, setPage] = useState<CustomPage | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [otherPages, setOtherPages] = useState<CustomPage[]>([]);
+  const [page, setPage] = useState<CustomPage | null>(() => {
+    return DEFAULT_CUSTOM_PAGES.find((p) => p.slug === slug) || null;
+  });
+  const [loading, setLoading] = useState(false);
+  const [otherPages, setOtherPages] = useState<CustomPage[]>(() => {
+    return DEFAULT_CUSTOM_PAGES.filter((p) => p.slug !== slug);
+  });
 
   useEffect(() => {
     if (!slug) return;
@@ -83,18 +147,12 @@ export default function CustomPageDetail() {
       const pageList: CustomPage[] = saved ? JSON.parse(saved) : DEFAULT_CUSTOM_PAGES;
       const found = pageList.find((p) => p.slug === slug);
       
-      Promise.resolve().then(() => {
-        if (found) {
-          setPage(found);
-        }
-        setOtherPages(pageList.filter((p) => p.slug !== slug));
-        setLoading(false);
-      });
+      if (found) {
+        setPage(found);
+      }
+      setOtherPages(pageList.filter((p) => p.slug !== slug));
     } catch (e) {
       console.error(e);
-      Promise.resolve().then(() => {
-        setLoading(false);
-      });
     }
   }, [slug]);
 
@@ -128,7 +186,7 @@ export default function CustomPageDetail() {
     updateOrCreateMeta('meta[name="description"]', 'name', 'description', computedDesc);
     updateOrCreateMeta('meta[property="og:title"]', 'property', 'og:title', computedTitle);
     updateOrCreateMeta('meta[property="og:description"]', 'property', 'og:description', computedDesc);
-    updateOrCreateMeta('meta[property="og:url"]', 'property', 'og:url', `https://rizwansaeed.com/custom-pages/${page.slug}`);
+    updateOrCreateMeta('meta[property="og:url"]', 'property', 'og:url', `https://rizwansaddique.site/custom-pages/${page.slug}`);
     updateOrCreateMeta('meta[name="twitter:title"]', 'name', 'twitter:title', computedTitle);
     updateOrCreateMeta('meta[name="twitter:description"]', 'name', 'twitter:description', computedDesc);
   }, [page]);
@@ -278,13 +336,13 @@ export default function CustomPageDetail() {
                   '@type': 'ListItem',
                   position: 1,
                   name: 'Home',
-                  item: 'https://rizwansaeed.com/',
+                  item: 'https://rizwansaddique.site/',
                 },
                 {
                   '@type': 'ListItem',
                   position: 2,
                   name: page.title,
-                  item: `https://rizwansaeed.com/custom-pages/${page.slug}`,
+                  item: `https://rizwansaddique.site/custom-pages/${page.slug}`,
                 },
               ],
             }),
@@ -407,10 +465,10 @@ export default function CustomPageDetail() {
 
             <div className="md:col-span-6 flex flex-col items-start md:items-end justify-between gap-4">
               <div className="flex items-center gap-3">
-                <a href="#" className="w-8 h-8 rounded-full bg-[#231F17]/50 border border-[#2C2419] flex items-center justify-center text-[#6B6053] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Instagram className="w-4 h-4" /></a>
-                <a href="#" className="w-8 h-8 rounded-full bg-[#231F17]/50 border border-[#2C2419] flex items-center justify-center text-[#6B6053] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Linkedin className="w-4 h-4" /></a>
-                <a href="#" className="w-8 h-8 rounded-full bg-[#231F17]/50 border border-[#2C2419] flex items-center justify-center text-[#6B6053] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Twitter className="w-4 h-4" /></a>
-                <a href="#" className="w-8 h-8 rounded-full bg-[#231F17]/50 border border-[#2C2419] flex items-center justify-center text-[#6B6053] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Github className="w-4 h-4" /></a>
+                <a href="https://instagram.com/rizwansaeed" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-[#231F17]/50 border border-[#2C2419] flex items-center justify-center text-[#6B6053] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Instagram className="w-4 h-4" /></a>
+                <a href="https://www.linkedin.com/in/rizwansaeed" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-[#231F17]/50 border border-[#2C2419] flex items-center justify-center text-[#6B6053] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Linkedin className="w-4 h-4" /></a>
+                <a href="https://x.com/rizwansaeed" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-[#231F17]/50 border border-[#2C2419] flex items-center justify-center text-[#6B6053] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Twitter className="w-4 h-4" /></a>
+                <a href="https://github.com/Rizwansaeed61" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-[#231F17]/50 border border-[#2C2419] flex items-center justify-center text-[#6B6053] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Github className="w-4 h-4" /></a>
               </div>
               <p className="text-xs text-[#6B6053]">© 2026 Rizwan Saeed. All rights reserved.</p>
             </div>

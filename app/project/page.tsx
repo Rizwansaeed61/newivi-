@@ -76,29 +76,24 @@ const DEFAULT_PROJECTS: Project[] = [
 
 export default function ProjectDirectoryPage() {
   const router = useRouter();
-  const [projects, setProjects] = useState<Project[]>([]);
+  const [projects, setProjects] = useState<Project[]>(DEFAULT_PROJECTS);
   const [searchQuery, setSearchQuery] = useState('');
-  const [recentSearches, setRecentSearches] = useState<string[]>([]);
+  const [recentSearches, setRecentSearches] = useState<string[]>(['SaaS', 'E-commerce', 'Dashboard']);
   const [selectedFilter, setSelectedFilter] = useState<'all' | 'web' | 'ui-ux' | 'app'>('all');
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     try {
-      const saved = localStorage.getItem('jenny_projects');
-      const loadedProjects = saved ? JSON.parse(saved) : DEFAULT_PROJECTS;
+      const saved = localStorage.getItem('rizwan_projects') || localStorage.getItem('jenny_projects');
+      if (saved) {
+        setProjects(JSON.parse(saved));
+      }
       const savedSearches = localStorage.getItem('rizwan_recent_searches_project');
-      const searchesArr = savedSearches ? JSON.parse(savedSearches) : ['SaaS', 'E-commerce', 'Dashboard'];
-
-      Promise.resolve().then(() => {
-        setProjects(loadedProjects);
-        setRecentSearches(searchesArr);
-        setLoading(false);
-      });
+      if (savedSearches) {
+        setRecentSearches(JSON.parse(savedSearches));
+      }
     } catch (e) {
-      Promise.resolve().then(() => {
-        setProjects(DEFAULT_PROJECTS);
-        setLoading(false);
-      });
+      console.error(e);
     }
   }, []);
 
@@ -344,10 +339,10 @@ export default function ProjectDirectoryPage() {
 
             <div className="md:col-span-6 flex flex-col items-start md:items-end justify-between gap-4">
               <div className="flex items-center gap-3">
-                <a href="#" className="w-8 h-8 rounded-full bg-[#231F17]/50 border border-[#2C2419] flex items-center justify-center text-[#6B6053] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Instagram className="w-4 h-4" /></a>
-                <a href="#" className="w-8 h-8 rounded-full bg-[#231F17]/50 border border-[#2C2419] flex items-center justify-center text-[#6B6053] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Linkedin className="w-4 h-4" /></a>
-                <a href="#" className="w-8 h-8 rounded-full bg-[#231F17]/50 border border-[#2C2419] flex items-center justify-center text-[#6B6053] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Twitter className="w-4 h-4" /></a>
-                <a href="#" className="w-8 h-8 rounded-full bg-[#231F17]/50 border border-[#2C2419] flex items-center justify-center text-[#6B6053] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Github className="w-4 h-4" /></a>
+                <a href="https://instagram.com/rizwansaeed" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-[#231F17]/50 border border-[#2C2419] flex items-center justify-center text-[#6B6053] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Instagram className="w-4 h-4" /></a>
+                <a href="https://www.linkedin.com/in/rizwansaeed" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-[#231F17]/50 border border-[#2C2419] flex items-center justify-center text-[#6B6053] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Linkedin className="w-4 h-4" /></a>
+                <a href="https://x.com/rizwansaeed" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-[#231F17]/50 border border-[#2C2419] flex items-center justify-center text-[#6B6053] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Twitter className="w-4 h-4" /></a>
+                <a href="https://github.com/Rizwansaeed61" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-[#231F17]/50 border border-[#2C2419] flex items-center justify-center text-[#6B6053] hover:text-[#E59500] hover:border-[#E59500] transition-colors"><Github className="w-4 h-4" /></a>
               </div>
               <p className="text-xs text-[#6B6053]">© 2026 Rizwan Saeed. All rights reserved.</p>
             </div>
